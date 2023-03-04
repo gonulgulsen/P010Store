@@ -1,0 +1,50 @@
+﻿@model HomePageViewModel
+
+@{
+    ViewData["Title"] = "Ana Sayfa";
+}
+
+<partial name="_Carousel" model="Model.Carousels"/>
+
+@* _Layouttaki await RenderSection metodundan jqueryleri javascriptleri kullanmış oldum.Sectionları normal sayfasına eklicez partiallarda çalışmıyor*@
+@section Scripts{
+    <script>
+        $(".carousel-item:first").addClass("active")
+        $(".carousel-indicators button:first").addClass("active")
+
+    </script>
+}
+
+
+<!-- Header-->
+  <header class="bg-dark py-5 mt-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">Ürünlerimiz</h1>
+                <p class="lead fw-normal text-white-50 mb-0">Sizin için seçtiklerimiz</p>
+            </div>
+        </div>
+    </header>
+
+
+<partial name="_Products" model="Model.Products" />
+<!-- Header-->
+  <header class="bg-dark py-5 my-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">Markalar</h1>
+                <p class="lead fw-normal text-white-50 mb-0">En iyi markalar burada</p>
+            </div>
+        </div>
+    </header>
+
+<div class="row">
+    @foreach (var item in Model.Brands)
+    {
+        <div class="col">
+            <a href="/@item.Name.ToLower()/Brands/Index/@item.Id">
+                <img src="/Img/@item.Logo" alt="@item.Name" title="@item.Name" height="60" />
+            </a>
+        </div>
+    }
+</div>
